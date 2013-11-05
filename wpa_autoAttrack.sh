@@ -77,7 +77,10 @@ stop_replay(){
 
 
 tmpfile=$(mktemp)
-test -e $tmpfile || (echo "can't mktemp"; exit 1)
+test -e $tmpfile || {
+			echo "can't mktemp"
+			exit 1
+		    }
 
 trap "rm -f $tmpfile; echo -e '\nterminated manually...'; exit 2;" INT
 
