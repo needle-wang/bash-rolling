@@ -2,7 +2,7 @@
 #modify the tomcat's port(s).
 #if you would put several tomcats in a Linux...
 #use it to modify the web port,shutdown port,AJP1.3 port.
-#test it successfull with tom6 and tom7.
+#test it successfully with tom6 and tom7.
 #by needle wang
 #version2:
 #2013-05-02 星期四 10:44
