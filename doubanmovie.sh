@@ -66,7 +66,7 @@ printListOnePage(){
 echo "$1" | tr '\n' ' ' | grep -oP '(?<=<div class="pl2">).*?(?=</div>)' | \
 	while read i
 	do
-		name=$(echo "$i" | grep -oP '(?<= >).*(?=</a>)' | sed 's;<span.*">;;g;s;</span>;;g' )
+		name=$(echo "$i" | grep -oP '(?<=>).*(?=</a>)' | sed 's;<span.*">;;g;s;</span>;;g;s; ;;g' )
 		score=$(echo "$i" | grep -oP '(?<="rating_nums">).*?(?=</span>)' )
 		year=$(echo "$i" | egrep -o '[0-9]{4}(-[0-9]{2}){2}' | head -1 )
 		test "${year}" && year="${year} "

