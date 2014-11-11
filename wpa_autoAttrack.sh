@@ -7,24 +7,27 @@
 #default:wlan0, mon0
 #request: aircrack suite should be installed.
 #
-#make it in kali linux.
+#code it in kali linux.
+#test it in kali, ubuntu12.04
 #
 #maybe can add aircrack session function in version2.
 #by needle wang
 #
 #version1.2:
+#2014年 11月 11日 星期二 18:54:21 CST
+#add check_handshake
+#2014年 11月 02日 星期日 06:17:02 CST
 #change inputing essid to selecting essid.
 #and change grep essid to grep -F essid.
-#2014年 11月 02日 星期日 06:17:02 CST
 
 #version1.1:
+#2013年 11月 02日 星期六 00:40:28 CST
 #fixed essid inputed is none or contains blank.
 #added killing aireplay-ng
-#2013年 11月 02日 星期六 00:40:28 CST
 #
 #version1.0:
-#waste one night...
 #2013年 10月 30日 星期三 05:49:36 CST
+#waste one night...
 
 test -f "$1" && test -r "$1" || {
 					echo "need a wordlist file."
