@@ -130,6 +130,10 @@ test -e $tmpfile || {
 trap "rm -f \"$tmpfile\";airmon-ng stop mon0; echo -e '\nterminated manually...'; exit 2;" INT
 
 monitor_status_str=$(airmon-ng)
+if echo "${monitor_status_str}" | grep -q 'as root'; then
+    echo -e "need ${monitor_status_str}\nexit..."
+    exit 1
+fi
 #if there is no monitor, start one.
 #and only use mon0, maybe change it in future. ^||
 echo "${monitor_status_str}" | grep -q 'mon0' || airmon-ng start "${interface}"
