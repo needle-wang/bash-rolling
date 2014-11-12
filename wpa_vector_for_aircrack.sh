@@ -5,7 +5,7 @@
 #help yourself...
 #
 #default:wlan0, mon0
-#request: aircrack1.2 beta3 suite
+#request: aircrack1.2 beta3 suite at least
 #
 #code it in kali linux.
 #test it in kali, ubuntu12.04
