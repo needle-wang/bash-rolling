@@ -1,9 +1,8 @@
-bash-rolling
-============
+##bash-rolling  
 **shell long live!**  
 **linux long live!**  
 
-those can run in debian series.  
+*those can run in debian series.*  
 
 **badremoteuser.sh:**  
 get login failure count in ubuntu server!  
@@ -13,7 +12,7 @@ print all files' md5 in current dir.
 
 **chtomport.sh:**  
 give me the file server.xml of tomcat6/7,  
-I can change the ports: web port, shutdown port, ajp port.  
+i can change the ports: web port, shutdown port, ajp port.  
 -h for help.  
 
 **coolReadPasswd.sh:**  
