@@ -4,7 +4,7 @@
 #用法：onlyDir.sh [-a]
 
 
-if [ $# -gt 1 ] 
+if [ $# -gt 1 ]
 then
 	echo '用法：onlyDir.sh [-a]'
 	exit 1
@@ -24,7 +24,7 @@ then
 	esac
 fi
 
-ls -lFhrt | grep ^d | awk '{print $0}' | sort
+ls -AlFhrt | grep '^d' | awk '{print $0}' | sort
 
 #随便加的~
 exit 0
