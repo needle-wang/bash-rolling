@@ -7,7 +7,10 @@ test "$1" || {
         exit 1
     }
 
-cd $(dirname "$1")
-filename=$(basename "$1")
-echo $(pwd)/${filename}
-
+if cd $(dirname "$1")
+then
+    filename=$(basename "$1")
+    echo $(pwd)/${filename}
+else
+    echo 'cd failure.'
+fi
