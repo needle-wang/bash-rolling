@@ -10,7 +10,7 @@ test "$1" || {
 if cd $(dirname "$1")
 then
     filename=$(basename "$1")
-    echo $(pwd)/${filename}
+    echo "'$(pwd)/${filename}'"
 else
     echo 'cd failure.'
 fi
