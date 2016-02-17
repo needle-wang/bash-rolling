@@ -9,6 +9,7 @@
 
 netCard0="eth0"
 netCard1="wlan0"
+ip_api="www.ipip.net/ip.php" 
 
 #test:
 #ifconfig eth0|awk '/inet/ {split($2,x,":");print x[2]}'
@@ -20,10 +21,14 @@ echo $2|awk '{print "  内网IP:";split($7,x,":");print "\t" x[2];split($9,x,":"
 
 shownetIP(){
 printf "外网IP:\n\t"
-wget -q -O - "www.ipip.net/ip.php" | grep -o 'color: rgb(243, 102, 102).*/' | egrep -o '([0-9]{1,3}\.){3}[0-9]{1,3}'
-
+#wget -q -O - "$ip_api" | grep -o 'color: rgb(243, 102, 102).*/' | egrep -o '([0-9]{1,3}\.){3}[0-9]{1,3}'
+ip_mesg=$(wget -q -O - "$ip_api" | grep -A5 '您的当前IP')
+wan_ip=$(echo "$ip_mesg" | head -n 1 | egrep -o '([0-9]{1,3}\.){3}[0-9]{1,3}')
+ip_location=$(echo "$ip_mesg" | tail -n 1 | sed 's;</span>;;')
+#ip_location内容里有回车(无换行), 用echo直接实现trim()功能
+#其内容没有转义哈, 可能有通配符的隐患(可能性极小)
+echo $wan_ip ${ip_location}
 }
-
 
 for i in "$netCard0" "$netCard1"
 do
@@ -31,8 +36,11 @@ do
     if echo "$netCardMessage" | grep -q "inet"; then
         showlocalIP "$i" "$netCardMessage"
         shownetIP
+        is_LAN=true
     fi
 done
+
+test "$is_LAN" || ifconfig
 
 unset $netCard0
 unset $netCard1
