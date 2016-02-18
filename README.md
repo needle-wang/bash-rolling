@@ -22,7 +22,7 @@ i can change the ports: web port, shutdown port, ajp port.
 -h for help.  
 
 **clrRecentlyUsed.sh:**  
-clear recently used history in unity desktop of ubuntu.  
+clear the recently used record in unity desktop of ubuntu.  
 
 **coolReadPasswd.sh:**  
 just print the /etc/passwd as good format.  
