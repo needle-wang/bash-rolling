@@ -7,6 +7,12 @@
 **badremoteuser.sh:**  
 get login failure count in ubuntu server!  
 
+**bri.sh:**  
+show ubuntu desktop's backlight.  
+
+**browserlink.sh:**  
+HOW-TO about browserlink of vim.  
+
 **check_a_dir_all_file_md5.sh:**  
 print all files' md5 in current dir.  
 
@@ -14,6 +20,9 @@ print all files' md5 in current dir.
 give me the file server.xml of tomcat6/7,  
 i can change the ports: web port, shutdown port, ajp port.  
 -h for help.  
+
+**clrRecentlyUsed.sh:**  
+clear recently used in ubuntu.  
 
 **coolReadPasswd.sh:**  
 just print the /etc/passwd as good format.  
@@ -41,7 +50,7 @@ print the file's fullpath you give me.
 as the name, only print the hide stuff in current dir.  
 
 **ipconfig.sh:**  
-print LAN IP and MAC address for china's mainland user(including IP given by ISP).  
+print LAN IP, MAC address, WAN IP and location
 
 **log-on.pl:**  
 It's from chinese ubuntu forum, not mine.  
@@ -56,11 +65,27 @@ print reverse shell usage using nc and pipe.
 **path.sh:**  
 echo $PATH  
 
+**pfree.sh:**  
+show the rss(used momery) size: total or a given process! I love it!  
+
 **pingscan.sh:**  
 ping 192.168.1.1/24 and report if it's alive.  
 
+**printLastLine.sh:**  
+printLastLine.sh filename.  
+
+**pstop.sh:**  
+use ps to grep the top 10 of cpu/mem/vsz/rss.  
+
+**su_logger.sh:**  
+a su wrapper which can log the passwd you type!  
+
 **timer.sh:**  
 just like a bomb's timer but do nothing. :)  
+
+**topgrep.sh:**  
+like pstop.sh but use the command top.  
+do you know the different between ps and top?  
 
 **unzip-gbk.py:**  
 unzip the gbk zip file.  
