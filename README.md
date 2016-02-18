@@ -37,6 +37,9 @@ give me a url, i can put the mess in remote server's access log.
 **date_in_term_topright.sh:**  
 show the time at the top-right of terminal.  
 
+**df.sh:**  
+filter /dev.  
+
 **dironly.sh:**  
 as the name, only print dirs(include hide dirs) in current dir.  
 
