@@ -1,6 +1,6 @@
 ##bash-rolling  
-**shell long live!**  
-**linux long live!**  
+***long live shell!***  
+***long live linux!***  
 
 *those can run in debian series.*  
 
