@@ -46,6 +46,9 @@ as the name, only print dirs(include hide dirs) in current dir.
 **doubanmovie.sh:**  
 give me a movie name, i can tell you the score in douban.com.  
 
+**encoding_str.sh:**  
+just run it. you will know what's this!  
+
 **fullpath.sh:**  
 print the file's fullpath you give me.  
 
