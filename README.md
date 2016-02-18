@@ -5,10 +5,10 @@
 *those can run in debian series.*  
 
 **badremoteuser.sh:**  
-get login failure count in ubuntu server!  
+get the count of login failure in ubuntu server!  
 
 **bri.sh:**  
-show ubuntu desktop's backlight.  
+show the ubuntu desktop's backlight.  
 
 **browserlink.sh:**  
 HOW-TO about browserlink of vim.  
@@ -22,7 +22,7 @@ i can change the ports: web port, shutdown port, ajp port.
 -h for help.  
 
 **clrRecentlyUsed.sh:**  
-clear recently used in ubuntu.  
+clear recently used history in unity desktop of ubuntu.  
 
 **coolReadPasswd.sh:**  
 just print the /etc/passwd as good format.  
@@ -78,7 +78,7 @@ ping 192.168.1.1/24 and report if it's alive.
 printLastLine.sh filename.  
 
 **pstop.sh:**  
-use ps to grep the top 10 of cpu/mem/vsz/rss.  
+use ps to grep top 10 of cpu/mem/vsz/rss or a given process.  
 
 **su_logger.sh:**  
 a su wrapper which can log the passwd you type!  
