@@ -52,8 +52,14 @@ just run it. you will know what's this!
 **fullpath.sh:**  
 print the file's fullpath you give me.  
 
+**gengxin.sh:**  
+apt-get update and dist-upgrade in ubuntu.  
+
 **hideonly.sh:**  
 as the name, only print the hide stuff in current dir.  
+
+**human_readable.awk:**  
+make a col of number into a human readable format like ls -hl.  
 
 **ipconfig.sh:**  
 print LAN IP, MAC address, WAN IP and location
@@ -95,6 +101,9 @@ do you know the different between ps and top?
 
 **unzip-gbk.py:**  
 unzip the gbk zip file.  
+
+**update_py_pkgs.py:**  
+use pip to install --update all python packages.  
 
 **use_aircrack.sh:**  
 if you forget how to use aircrack-ng suit, 
