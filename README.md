@@ -16,6 +16,9 @@ HOW-TO about browserlink of vim.
 **check_a_dir_all_file_md5.sh:**  
 print all files' md5 in current dir.  
 
+**check_gi_st.sh:**  
+run git status at each git repository subdir of current dir.  
+
 **chtomport.sh:**  
 give me the file server.xml of tomcat6/7,  
 i can change the ports: web port, shutdown port, ajp port.  
