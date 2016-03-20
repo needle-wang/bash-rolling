@@ -12,12 +12,13 @@ show the ubuntu desktop's backlight.
 
 **browserlink.sh:**  
 HOW-TO about browserlink of vim.  
+run it as a server, so can serve all html.  
 
 **check_a_dir_all_file_md5.sh:**  
 print all files' md5 in current dir.  
 
 **check_gi_st.sh:**  
-run git status at each git repository subdir of current dir.  
+run git status at each git repository subdir of a given dir.  
 
 **chtomport.sh:**  
 give me the file server.xml of tomcat6/7,  
