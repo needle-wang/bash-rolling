@@ -129,6 +129,9 @@ wrap the reaver if you forget how to use it again!
 build the huge version of vim74 in a shell.  
 don't bother yourself any more! 
 
+**vpn-route.sh:**  
+chnroutes.py's wrapper.  
+
 **wait_then_shut.sh:**  
 give me the process(for downloading or something else)'s pid,  
 then, go to bed, let me shudown the PC.  
