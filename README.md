@@ -129,6 +129,10 @@ wrap the reaver if you forget how to use it again!
 build the huge version of vim74 in a shell.  
 don't bother yourself any more! 
 
+**volume_in_hhkb.sh:**  
+use amixer to adjust volume.  
+release the right hand, and set a hotkey.  
+
 **vpn-route.sh:**  
 chnroutes.py's wrapper.  
 
