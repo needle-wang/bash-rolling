@@ -8,9 +8,9 @@ import pip
 from subprocess import call
 
 def main():
-    for dist in pip.get_installed_distributions():
-        call('sudo -H pip install --upgrade ' + dist.project_name, shell =True)
+  for dist in pip.get_installed_distributions():
+    call('sudo -H pip install -U -i https://pypi.tuna.tsinghua.edu.cn/simple ' +
+        dist.project_name, shell = True)
 
 if __name__ == '__main__':
-    main()
-
+  main()

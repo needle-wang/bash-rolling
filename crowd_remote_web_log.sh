@@ -6,7 +6,7 @@
 test "$1" || {
 				echo 'need a url.'
 				exit 1
-			}
+			 }
 i=1
 while true; do
 	if [ $i -eq 1000 ]; then

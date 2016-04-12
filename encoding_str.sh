@@ -239,4 +239,3 @@ fi
 
 test "$outputfile" && echo "$result" >"$outputfile" || echo "$result"
 
-

@@ -8,15 +8,16 @@ if [ ! "$1" ]; then
     exit 1
 fi
 
+sudo su
+
 while true
 do
-	sleep 2m
-	#如果虚拟机的PID没有后关闭物理机
+	#如果虚拟机的PID没有后, 关闭物理机
 	if ! ps -p "$1" >/dev/null
 	then
 		break
 	fi
+	sleep 2m
 done
 
-shutdown -h now
-
+sudo shutdown -h now

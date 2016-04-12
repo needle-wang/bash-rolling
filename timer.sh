@@ -3,9 +3,10 @@
 #2014年 04月 13日 星期日 04:15:21 CST
 
 MIN=10
-for ((i=MIN*60;i>=0;i--))
+
+for ((i=MIN*60; i>=0; i--))
 do
-	time=$(date -d"0+$i sec" +%H:%M:%S)
+	time=$(date -d "0+$i sec" +%H:%M:%S)
 	echo -ne "\r$time"
 	sleep 1
 done

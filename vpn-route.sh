@@ -19,7 +19,7 @@ test -e "$downfile" && sudo rm -v "$downfile"
 
 read -p "now, make sure a vpn has connected, then press [Enter] "
 
-cd "$HOME/bin" || exit 1
+cd "${HOME}/bin" || exit 1
 
 if [ ! -e "chnroutes.py" ]; then
     wget https://raw.github.com/fivesheep/chnroutes/master/chnroutes.py
