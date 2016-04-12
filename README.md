@@ -93,6 +93,15 @@ printLastLine.sh filename.
 **pstop.sh:**  
 use ps to grep top 10 of cpu/mem/vsz/rss or a given process.  
 
+**qzonemesg.sh:**  
+a public QQ number given, i can show the mesg of qzone.  
+
+**renjpg.sh:**  
+add \*.jpg of current dir with dir prefix.  
+
+**soft_for_new_OS.sh:**  
+when a new OS installed, install some packages I need.  
+
 **su_logger.sh:**  
 a su wrapper which can log the passwd you type!  
 
@@ -102,6 +111,9 @@ just like a bomb's timer but do nothing. :)
 **topgrep.sh:**  
 like pstop.sh but use the command top.  
 do you know the different between ps and top?  
+
+**touchpad.sh:**  
+turn on/off touchpad. a alias will be good.  
 
 **unzip-gbk.py:**  
 unzip the gbk zip file.  
