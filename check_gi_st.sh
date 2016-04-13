@@ -18,10 +18,13 @@ do
 
     result=$(git status)
 
-    if ! echo "${result}" | grep -q "干净的工作区"; then
-        echo "----- ${gitname} -----"
-        echo "${result}"
-        echo
+    if echo "${result}" | grep -q "干净的工作区"; then
+        if echo "${result}" | grep -q "一致"; then
+            continue
+        fi
     fi
+    echo "----- ${gitname} -----"
+    echo "${result}"
+    echo
 done
 
