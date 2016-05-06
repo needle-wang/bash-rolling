@@ -108,6 +108,10 @@ a su wrapper which can log the passwd you type!
 **timer.sh:**  
 just like a bomb's timer but do nothing. :)  
 
+**today_filter.awk:**  
+ls -Al | awk -f today_filter.awk  
+filter which's mtime is today  
+
 **topgrep.sh:**  
 like pstop.sh but use the command top.  
 do you know the different between ps and top?  
