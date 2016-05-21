@@ -4,6 +4,10 @@
 
 *those can run in debian series.*  
 
+**backlight_in_hhkb.sh:**  
+use xbacklight to change backlight.  
+set a global hotkey in linux DE.  
+
 **badremoteuser.sh:**  
 get the count of login failure in ubuntu server!  
 
@@ -51,10 +55,11 @@ as the name, only print dirs(include hide dirs) in current dir.
 give me a movie name, i can tell you the score in douban.com.  
 
 **encoding_str.sh:**  
-just run it. you will know what's this!  
+My killer script! Just run it. you will know what's this!  
 
 **fullpath.sh:**  
 print the file's fullpath you give me.  
+like realpath or readlink -f
 
 **gengxin.sh:**  
 apt-get update and dist-upgrade in ubuntu.  
@@ -147,7 +152,7 @@ don't bother yourself any more!
 
 **volume_in_hhkb.sh:**  
 use amixer to adjust volume.  
-release the right hand, and set a hotkey.  
+set a global hotkey in linux DE.  
 
 **vpn-route.sh:**  
 chnroutes.py's wrapper.  
@@ -170,4 +175,5 @@ give it a wordlist when you run it,
 whatever you want to crack the password or not now.  
 by the way, it can not run at kali2.0  
 if I got some time, I would figure it out. :)  
+does aircrack can work in kali2.0 step by step? i give up~  
 
