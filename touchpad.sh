@@ -9,7 +9,7 @@
 
 sign=$(synclient |awk '{if($1 == "TouchpadOff"){print $3}}')
 
-if [ ${sign} -eq 0 ]; then
+if [ "${sign}" == "0" ]; then
 	synclient touchpadoff=1 && echo '触摸板被禁用.'
 else
 	synclient touchpadoff=0 && echo '触摸板被启用.'

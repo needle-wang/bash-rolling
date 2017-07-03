@@ -3,6 +3,19 @@
 # 全局热键设置成 $0 -dec 和 $0 -inc
 # 测试环境:
 # ubuntu14.04, xfce4
+#
+# 2016年 09月 29日 星期四 17:03:28 CST
+# 如果直接运行xbacklight报错: No outputs have backlight property
+# https://wiki.archlinux.org/index.php/Backlight
+# 因为xbacklight没有找到正确的目录/sys/class/backlight
+# 解决如下:
+# /etc/X11/xorg.conf (如果没有此文件, 可新建即可)
+#Section "Device"
+    #Identifier  "Card0"
+    #Driver      "intel"
+    #Option      "Backlight"  "intel_backlight"
+#EndSection
+#
 # 2016年 05月 21日 星期六 17:48:32 CST
 #
 # 来自: http://forum.ubuntu.org.cn/viewtopic.php?p=3056691
