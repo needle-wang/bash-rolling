@@ -5,7 +5,7 @@
 cur="$HOME/.vim/bundle"
 
 if [[ "$1" ]]; then
-    cur=$1
+  cur=$1
 fi
 
 cd $cur || exit 1
@@ -13,18 +13,18 @@ cd $cur || exit 1
 cur=$(pwd)
 for i in *
 do
-    gitname=${cur}/${i}
-    cd ${gitname} || continue
+  gitname=${cur}/${i}
+  cd ${gitname} || continue
 
-    result=$(git status)
+  result=$(git status)
 
-    if echo "${result}" | grep -q "干净的工作区"; then
-        if echo "${result}" | grep -q "一致"; then
-            continue
-        fi
-    fi
-    echo "----- ${gitname} -----"
-    echo "${result}"
-    echo
+  if echo "${result}" | grep -q "干净的工作区"; then
+      if echo "${result}" | grep -q "一致"; then
+          continue
+      fi
+  fi
+  echo -e "\033[32m----- ${gitname} -----\033[0m"
+  echo "${result}"
+  echo
 done
 
