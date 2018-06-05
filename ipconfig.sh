@@ -13,7 +13,7 @@
 
 netCard0="eth0"
 netCard1="wlan0"
-ip_api="www.ipip.net/ip.php"
+ip_api="www.ipip.net/ip.html"
 
 showlocalIP(){
   echo -ne "$1\n  内网IP:\n\t"
@@ -38,12 +38,13 @@ EOF
 shownetIP(){
   printf "外网IP:\n\t"  #用echo也行, 这里是为了练习下printf
   #wget -q -O - "$ip_api" | grep -o 'color: rgb(243, 102, 102).*/' | egrep -o '([0-9]{1,3}\.){3}[0-9]{1,3}'
-  local ip_mesg=$(wget -q -O - "$ip_api" | grep -A5 '您的当前IP')
-  local wan_ip=$(echo "$ip_mesg" | head -n 1 | egrep -o '([0-9]{1,3}\.){3}[0-9]{1,3}')
-  local ip_location=$(echo "$ip_mesg" | tail -n 1 | sed 's;</span>;;')
+  local ip_mesg=$(wget -q -O - "$ip_api" | grep -A20 '当前IP')
+  local wan_ip=$(echo "$ip_mesg" | sed -n '2p' | egrep -o '([0-9]{1,3}\.){3}[0-9]{1,3}')
+  ip_mesg=$(echo "$ip_mesg" | grep -A10 '地理位置')
+  local ip_location=$(echo "$ip_mesg" | sed -n '2p' | sed -e 's;.*<.*">;;' -e 's;</span>.*;;')
   #ip_location内容里有回车(无换行), 用echo直接实现trim()功能
   #其内容没有转义哈, 可能有通配符的隐患(可能性极小)
-  echo ${wan_ip} ${ip_location}
+  echo "${wan_ip} (${ip_location})"
 }
 
 for i in "$netCard0" "$netCard1"
