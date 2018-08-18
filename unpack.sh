@@ -1,5 +1,7 @@
 #!/bin/bash -
-#
+# need package:
+# tar(OS必需), gzip(OS必需, 包含: gunzip, uncompress)
+# bzip2(包含: bunzip2), unrar, unzip, p7zip(包含: 7zr)
 # 2018年 07月 22日 星期日 15:51:19 CST
 
 extract() {
@@ -36,7 +38,7 @@ if [[ -f "$1" ]]; then
       uncompress "$1" 
       ;;
     *.7z)
-      7z x "$1"       
+      7zr x "$1"       
       ;;
     *)
       echo "$1 cannot be extracted via extract()"
