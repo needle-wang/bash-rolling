@@ -52,12 +52,13 @@ urlencode(){
 
 char_list=$(cat $origin_file | sed 's;\\;\\\\;g')
 #python3
-python -c "import urllib.request; print(urllib.request.quote(\"${char_list}\"))"
+python3 -c "import urllib.request; print(urllib.request.quote(\"${char_list}\"))"
 }
 
 urldecode(){
 char_list=$(cat $origin_file)
-python -c "import urllib.request; print(urllib.request.unquote(\"${char_list}\"))"
+#python3
+python3 -c "import urllib.request; print(urllib.request.unquote(\"${char_list}\"))"
 }
 
 str_to_octonary(){
