@@ -7,7 +7,7 @@
 use xbacklight to change backlight.  
 set a global hotkey in linux DE.  
 
-2. `Badremoteuser.sh`  
+2. `badremoteuser.sh`  
 get the count of login failure.  
 
 3. `bri.sh`  
@@ -132,7 +132,7 @@ unpack zip, rar, tar.gz...
 40. `unzip-gbk.py`  
 unzip the gbk zip file.  
 
-41. `update_py2-3_pkgs.py`  
+41. `update_py2-3_pkgs.sh`  
 update all python version's packages.  
 
 42. `upda_py2_pkgs.py`  
