@@ -15,6 +15,7 @@ aptitude -y install accountsservice manpages-zh mlocate dos2unix tree ascii unra
 # 网络
 aptitude -y install dnsutils mailutils openssh-server openssh-client lrzsz lftp fping traceroute \
                     curl aria2 axel w3m youtube-dl \
+                    kcptun polipo \
                     atop htop iotop iftop nload
 sudo pip3 install httpie
 
@@ -24,7 +25,7 @@ aptitude -y install cmake python-dev python-pip \
                     git gitk git-cola \
                     mysql-server mysql-workbench mycli \
                     libncurses5-dev libjpeg-dev \
-                    cloc # 代码行数统计(类似于wc -l)
+                    jq cloc # 代码行数统计(类似于wc -l)
                     # python-tk python3-tk
 
 # for nodejs

@@ -13,7 +13,7 @@
 
 netCard0="eth0"
 netCard1="wlan0"
-ip_api="www.ipip.net/ip.html"
+ip_api="https://ipv4.ip.sb/addrinfo"
 
 showlocalIP(){
   echo -ne "$1\n  内网IP:\n\t"
@@ -37,14 +37,12 @@ EOF
 
 shownetIP(){
   printf "外网IP:\n\t"  #用echo也行, 这里是为了练习下printf
-  #wget -q -O - "$ip_api" | grep -o 'color: rgb(243, 102, 102).*/' | egrep -o '([0-9]{1,3}\.){3}[0-9]{1,3}'
-  local ip_mesg=$(wget -q -O - "$ip_api" | grep -A20 '当前IP')
-  local wan_ip=$(echo "$ip_mesg" | sed -n '2p' | egrep -o '([0-9]{1,3}\.){3}[0-9]{1,3}')
-  ip_mesg=$(echo "$ip_mesg" | grep -A10 '地理位置')
-  local ip_location=$(echo "$ip_mesg" | sed -n '2p' | sed -e 's;.*<.*">;;' -e 's;</span>.*;;')
-  #ip_location内容里有回车(无换行), 用echo直接实现trim()功能
-  #其内容没有转义哈, 可能有通配符的隐患(可能性极小)
-  echo "${wan_ip} (${ip_location})"
+  local ip_mesg=$(wget -q -O - "$ip_api")
+  local wan_ip=$(echo "$ip_mesg" | jq '.address' | sed 's;";;g')
+  local province=$(echo "$ip_mesg" | jq '.province' | sed 's;";;g')
+  local city=$(echo "$ip_mesg" | jq '.city' | sed 's;";;g')
+  local country=$(echo "$ip_mesg" | jq '.country' | sed 's;";;g')
+  echo "${wan_ip} ${province} ${city}(${country})"
 }
 
 for i in "$netCard0" "$netCard1"

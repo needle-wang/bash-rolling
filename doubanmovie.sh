@@ -1,15 +1,17 @@
 #!/bin/bash -
-#抓取豆瓣电影列表(如科幻, 按评分排序)
-#如要修改, 改url应该就可以了.
-#
-#by needle wang
-#
-#version2: 增加搜索列表及时间信息
-#以及完善减少修改量, 即智能化~
-#2013/10/06 周日 05:50
-#
-#version1: 完成电影列表及top250
-#2013/10/05 周六 03:36
+# 抓取豆瓣电影列表(如科幻, 按评分排序)
+# 如要修改, 改url应该就可以了.
+# 
+# 2018年 09月 21日 星期五 16:59:01 CST
+# douban改版成js获取数据了, 搜索某部电影的功能失效了, 废弃
+#  
+# 2013/10/06 周日 05:50
+# version2: 增加搜索列表及时间信息
+# 以及完善减少修改量, 即智能化~
+# 
+# 2013/10/05 周六 03:36
+# version1: 完成电影列表及top250
+# by needle wang
 #
 
 #choose situation 1(电影列表) or 2(top250)
@@ -107,7 +109,7 @@ echo "$1" | tr '\n' ' ' | grep -oP '(?<=<div class="pl2">).*?(?=</div>)' | \
 }
 
 trap "echo '中断';exit 1" INT
-for ((count=0;count<${pageSum};count++))
+for ((count=0; count<pageSum; count++))
 do
 	if [ "${1}" ]
 	then
@@ -119,6 +121,7 @@ do
 	echo "--------- url is ${url} ---------"
 
 	oneContent=$(wget -q "${url}" -O - )
+  #echo "$oneContent"
 
 	if [ "${1}" ]
 	then
