@@ -10,6 +10,10 @@
 #by needle wang
 #2014年 07月 15日 星期二 01:40:43 CST
 
+if ! which expect; then
+  exit 1
+fi
+
 #important!
 LANG=en 
 

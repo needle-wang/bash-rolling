@@ -50,8 +50,8 @@ filter /dev.
 14. `dironly.sh`  
 as the name, only print dirs(include hide dirs) in current dir.  
 
-15. `doubanmovie.sh`  
-give me a movie name, i can tell you the score in douban.com.  
+15. ~~`doubanmovie.sh`  
+give me a movie name, i can tell you the score in douban.com.~~  
 
 16. `encoding_str.sh`  
 My favor, Just run it. you will know what's this!  
@@ -100,8 +100,8 @@ printLastLine.sh filename.
 30. `pstop.sh`  
 use ps to grep top 10 of cpu/mem/vsz/rss or a given process.  
 
-31. `qzonemesg.sh`  
-a public QQ number given, i can show the mesg of qzone.  
+31. ~~`qzonemesg.sh`  
+a public QQ number given, i can show the mesg of qzone.~~  
 
 32. `renjpg.sh`  
 add \*.jpg of current dir with dir prefix.  
@@ -151,7 +151,7 @@ if you get the cookie line from wireshark,
 give me, i can format it into json for Edit this cookie.  
 
 46. `use_ettercap.sh`  
-always forget the useage of ettercap or arpspoof?  
+always forget the usage of ettercap or arpspoof?  
 let me tell you, just run it!  
 
 47. `use_reaver.sh`  
@@ -174,12 +174,12 @@ when you copy some huge dir, you may want to know the progress.
 cd into the destination and,  
 run it which calculate current dir's size at intervals.  
 
-52. `wpa_vector_for_aircrack.sh`  
+52. ~~`wpa_vector_for_aircrack.sh`  
 using aircrack-ng's steps is boring?  
 here, the shell wrap it,  
 and you can just follow this vector.  
 give it a wordlist when you run it,  
-whatever you want to crack the password or not now.  
+whatever you want to crack the password or not now.~~  
 by the way, it can not run at kali2.0  
 if I got some time, I would figure it out. :)  
 does aircrack can work in kali2.0 step by step? i give up~  
