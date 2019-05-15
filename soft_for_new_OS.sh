@@ -6,22 +6,30 @@
 # 日常使用, 美化, 维护
 apt-get -y install aptitude deborphan gtkorphan
 aptitude -y install numix-gtk-theme numix-icon-theme fonts-wqy-microhei fonts-wqy-zenhei fonts-symbola fonts-font-awesome \
-                    fcitx fcitx-table-wubi goldendict smplayer vlc dia
+                    fcitx fcitx-table-wubi goldendict smplayer vlc
 # accountsservice可以抑制lightdm的一些错误, 别装locate, 应该装mlocate
-aptitude -y install accountsservice manpages-zh mlocate dos2unix tree ascii unrar unzip p7zip autojump silversearcher-ag xbacklight \
-                    zhcon tmux terminator \
-                    arbtt #trash-cli
+# xbacklight terminator tmux byobu arbtt trash-cli
+aptitude -y install accountsservice manpages-zh mlocate dos2unix tree ascii unrar unzip p7zip zhcon autojump silversearcher-ag
+
+# github:
+  # cat增强
+  # https://github.com/sharkdp/bat
+  # grep增强, 目前还没进LTS的官方ppa, 还是暂时用ag吧
+  # https://github.com/BurntSushi/ripgrep
+  # find增强, mlocate多好用, catfish后端也用的mlocate
+  # https://github.com/sharkdp/fd
 
 # 网络
-aptitude -y install dnsutils mailutils openssh-server openssh-client lrzsz lftp fping traceroute \
+# openssh-server
+aptitude -y install dnsutils mailutils openssh-client lrzsz lftp fping traceroute \
                     curl aria2 axel w3m youtube-dl \
                     kcptun polipo \
                     atop htop iotop iftop nload
 sudo pip3 install httpie
 
 # 开发相关
-# 安装pip和pip3, 并升级, 然后卸载python-pip*
-aptitude -y install cmake python-dev python-pip \
+# 安装pip和pip3, 并升级, 然后卸载python*-pip
+aptitude -y install cmake python-dev python-pip python3-pip \
                     git gitk git-cola \
                     mysql-server mysql-workbench mycli \
                     libncurses5-dev libjpeg-dev \
@@ -36,10 +44,10 @@ aptitude -y install nodejs
 # apt-get install build-essential(包含gcc g++ make)  # for native addons
 
 # https://github.com/universal-ctags/ctags
-# pip install ipython
+# pip3 install ipython
 
 #for vim插件
-#pip install yapf isort flake8  #根据vim可识别python还是python3来选择是pip2还是pip3(echo has('python'))
+#pip3 install yapf isort flake8  #根据vim可识别python还是python3来选择是pip2还是pip3(echo has('python'))
 aptitude -y install shellcheck
 
 # 关于debian9下的goldendict(建议使用qt5版本)

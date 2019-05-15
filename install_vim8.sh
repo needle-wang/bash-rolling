@@ -20,7 +20,7 @@ sudo apt-get install libncurses5-dev libgnome2-dev libgnomeui-dev libgtk2.0-dev 
 # apt-get build-dep vim   #此行已废弃, 不再需要
 
 # 好像即使是vim8也不能同时支持python和python3~
-#./configure --enable-pythoninterp=yes; --enable-gui=gtk3时, 不能识别debian9的gtk3~
+#./configure --enable-pythoninterp=yes; --enable-gui=gtk3从没安装成功过~
 
 ./configure --with-features=huge --enable-python3interp=yes --enable-rubyinterp=yes --enable-perlinterp=yes --enable-luainterp=yes --enable-cscope --enable-gui=auto --with-x --enable-fontset --enable-multibyte --enable-xim --with-compiledby=needlewang2011@gmail.com
 
