@@ -29,30 +29,29 @@ aptitude -y install accountsservice manpages-zh mlocate dos2unix tree ascii unra
 aptitude -y install dnsutils mailutils openssh-client lrzsz lftp fping traceroute \
                     curl aria2 axel w3m youtube-dl \
                     kcptun polipo \
-                    atop htop iotop iftop nload
-sudo pip3 install httpie
+                    atop htop iftop iotop nload
 
 # 开发相关
-# 安装pip和pip3, 并升级, 然后卸载python*-pip
-aptitude -y install cmake python-dev python-pip python3-pip \
+# 使用get-pip.py文件 安装pip3
+# build-essential(包含gcc g++ make), 编译用, 这是必需的!
+aptitude -y install build-essential cmake \
                     git gitk git-cola \
                     mysql-server mysql-workbench mycli \
                     libncurses5-dev libjpeg-dev \
                     jq cloc # 代码行数统计(类似于wc -l)
-                    # python-tk python3-tk
+                    python3-tk
 
+sudo pip3 install httpie ipython
 # for nodejs
 # https://github.com/nodesource/distributions
 # https://docs.npmjs.com/
 curl -sL https://deb.nodesource.com/setup_8.x | sudo -E bash -
 aptitude -y install nodejs
-# apt-get install build-essential(包含gcc g++ make)  # for native addons
 
 # https://github.com/universal-ctags/ctags
-# pip3 install ipython
 
 #for vim插件
-#pip3 install yapf isort flake8  #根据vim可识别python还是python3来选择是pip2还是pip3(echo has('python'))
+pip3 install yapf isort flake8  #vim: echo has('python3')
 aptitude -y install shellcheck
 
 # 关于debian9下的goldendict(建议使用qt5版本)
