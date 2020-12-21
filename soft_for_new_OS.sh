@@ -28,18 +28,19 @@ aptitude -y install accountsservice manpages-zh mlocate dos2unix tree ascii unra
 # openssh-server
 aptitude -y install dnsutils mailutils openssh-client lrzsz lftp fping traceroute \
                     curl aria2 axel w3m youtube-dl \
-                    kcptun polipo \
+                    kcptun privoxy \
                     atop htop iftop iotop nload
 
 # 开发相关
 # 使用get-pip.py文件 安装pip3
 # build-essential(包含gcc g++ make), 编译用, 这是必需的!
 aptitude -y install build-essential cmake \
+                    mycli \
                     git gitk git-cola \
-                    mysql-server mysql-workbench mycli \
-                    libncurses5-dev libjpeg-dev \
                     jq cloc # 代码行数统计(类似于wc -l)
-                    python3-tk
+                    # mysql-server mysql-workbench \
+                    # libncurses5-dev libjpeg-dev \
+                    # python3-tk
 
 sudo pip3 install httpie ipython
 # for nodejs
@@ -50,9 +51,8 @@ aptitude -y install nodejs
 
 # https://github.com/universal-ctags/ctags
 
-#for vim插件
-pip3 install yapf isort flake8  #vim: echo has('python3')
-aptitude -y install shellcheck
+#for vim插件: echo has('python3')
+aptitude -y install python3-flake8 python3-isort python3-yapf shellcheck
 
 # 关于debian9下的goldendict(建议使用qt5版本)
 # 使用qt4的版本时(aptitude show goldendict), 会有 hotkey上输入框 的bug, 且界面字体过小(高分屏)

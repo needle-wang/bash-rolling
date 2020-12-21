@@ -44,8 +44,8 @@ EOF
 
 shownetIP(){
   printf "外网IP:\n\t"  #用echo也行, 这里是为了练习下printf
-  #local ip_mesg=$(wget -q -O - "$ip_api")
-  local ip_mesg='当前 IP：117.166.218.178  来自于：中国 江西 吉安  移动'
+  #local ip_mesg='当前 IP：117.166.218.178  来自于：中国 江西 吉安  移动'
+  local ip_mesg=$(wget -q -O - "$ip_api")
   echo "$ip_mesg)" | sed 's;当前 IP： *;;' | sed 's; *来自于：; (;'
   return
   local wan_ip=$(echo "$ip_mesg" | jq '.ip' | sed 's;";;g')
