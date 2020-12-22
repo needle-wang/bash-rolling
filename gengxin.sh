@@ -10,14 +10,14 @@ else
   APT='sudo apt-get'
 fi
 
+PROXY=""
 if [[ "$1" ]]; then
-  PROXY="-c \"$HOME/bin/apt-proxy.conf\""
-else
-  PROXY=""
+  PROXY="-c=$HOME/bin/apt-proxy.conf"
 fi
 
-$APT update -y
-$APT dist-upgrade -y "$PROXY"
+$APT -y $PROXY update
+$APT -y $PROXY upgrade
+$APT -y $PROXY dist-upgrade
 
 echo -e '\n2秒后 进行apt autoclean, 按任意键取消...\n'
 

@@ -9,7 +9,6 @@
 # 一次更新所有python包, required: sudo(of course!)
 # http://stackoverflow.com/questions/2720014/upgrading-all-packages-with-pip
 
-import sys
 from subprocess import call
 
 import pip
@@ -18,13 +17,15 @@ from pip._internal.utils.misc import get_installed_distributions
 
 
 def main():
-  # print('python版本: %s' % sys.version)
+  use_proxy = '-i https://pypi.tuna.tsinghua.edu.cn/simple'
   for dist in get_installed_distributions():
     print('[%s: %s]' % (dist.project_name, dist.location))
-    call(
-      'sudo -H pip3 install -U -i https://pypi.tuna.tsinghua.edu.cn/simple ' +
-      dist.project_name,
-      shell=True)
+    if 'local' in dist.location:
+      call('sudo -H pip3 install -U %s %s' % (use_proxy, dist.project_name),
+           shell=True)
+    else:
+      # 说明此包使用的是apt-get install python3-* 形式安装的
+      print('    installed by OS, I think it is better not to upgrade.')
     print('-------华丽的分割线-------')
 
 

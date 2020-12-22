@@ -3,15 +3,17 @@
 # 新装debian 9时要装的软件
 # 2014年 07月 26日 星期六 18:04:42 CST
 
-# 日常使用, 美化, 维护
-apt-get -y install aptitude deborphan gtkorphan
+# 日常使用/美化/维护
+apt-get -y install aptitude synaptic deborphan gtkorphan
 # ttf-mscorefonts-installer包: 该安装器会下载win下的核心字体, fonts-liberation包是win下核心字体的变体
-aptitude -y install numix-gtk-theme numix-icon-theme fonts-wqy-microhei fonts-wqy-zenhei fonts-symbola fonts-font-awesome \
+aptitude -y install numix-gtk-theme numix-icon-theme \
+                    fonts-wqy-microhei fonts-wqy-zenhei fonts-symbola fonts-font-awesome \
                     fcitx fcitx-table-wubi goldendict smplayer vlc
 # accountsservice可以抑制lightdm的一些错误, 别装locate, 应该装mlocate
 # xbacklight terminator tmux byobu arbtt trash-cli
-aptitude -y install accountsservice manpages-zh mlocate dos2unix tree ascii unrar unzip p7zip zhcon autojump silversearcher-ag \
-                    multitail synaptic
+aptitude -y install accountsservice manpages-zh mlocate dos2unix tree ascii unrar unzip p7zip zhcon \
+                    atop htop iftop iotop nload multitail \
+                    autojump silversearcher-ag
 
 # github:
   # cat增强
@@ -28,31 +30,31 @@ aptitude -y install accountsservice manpages-zh mlocate dos2unix tree ascii unra
 # openssh-server
 aptitude -y install dnsutils mailutils openssh-client lrzsz lftp fping traceroute \
                     curl aria2 axel w3m youtube-dl \
-                    kcptun privoxy \
-                    atop htop iftop iotop nload
+                    kcptun privoxy
 
 # 开发相关
 # 使用get-pip.py文件 安装pip3
-# build-essential(包含gcc g++ make), 编译用, 这是必需的!
-aptitude -y install build-essential cmake \
-                    mycli \
+# automake, build-essential(包含gcc g++ make), cmake: 用于编译, 必备的!
+aptitude -y install automake build-essential cmake\
                     git gitk git-cola \
-                    jq cloc # 代码行数统计(类似于wc -l)
+                    mycli jq cloc # 代码行数统计(类似于wc -l)
                     # mysql-server mysql-workbench \
                     # libncurses5-dev libjpeg-dev \
                     # python3-tk
 
-sudo pip3 install httpie ipython
-# for nodejs
-# https://github.com/nodesource/distributions
-# https://docs.npmjs.com/
-curl -sL https://deb.nodesource.com/setup_8.x | sudo -E bash -
-aptitude -y install nodejs
-
 # https://github.com/universal-ctags/ctags
+# 需要automake编译, 详见github上的源码里的docs/autotools.rst
+
+sudo pip3 install httpie ipython
 
 #for vim插件: echo has('python3')
 aptitude -y install python3-flake8 python3-isort python3-yapf shellcheck
+
+# for nodejs
+# https://github.com/nodesource/distributions
+# https://docs.npmjs.com/
+#curl -sL https://deb.nodesource.com/setup_8.x | sudo -E bash -
+#aptitude -y install nodejs
 
 # 关于debian9下的goldendict(建议使用qt5版本)
 # 使用qt4的版本时(aptitude show goldendict), 会有 hotkey上输入框 的bug, 且界面字体过小(高分屏)
