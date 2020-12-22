@@ -126,8 +126,8 @@ turn on/off touchpad. a alias will be good.
 - `unpack.sh`  
 unpack zip, rar, tar.gz...  
 
-- `unzip-gbk.py`  
-unzip the gbk zip file.  
+- `unzips-gbk.py`  
+unzip the gbk zip files.  
 
 - `upda_py2_pkgs.py`  
 use pip2 to install --update all python2 packages.  
