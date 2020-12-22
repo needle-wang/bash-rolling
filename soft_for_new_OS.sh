@@ -10,7 +10,7 @@ aptitude -y install numix-gtk-theme numix-icon-theme \
                     fonts-ubuntu fonts-ubuntu-console \
                     fonts-wqy-microhei fonts-wqy-zenhei \
                     fonts-symbola fonts-font-awesome \
-                    orage fcitx fcitx-table-wubi goldendict smplayer vlc
+                    fcitx fcitx-frontend-qt5 fcitx-table-wubi goldendict orage smplayer vlc
 # accountsservice可以抑制lightdm的一些错误, 别装locate, 应该装mlocate
 # xbacklight terminator tmux byobu arbtt trash-cli
 aptitude -y install accountsservice manpages-zh mlocate dos2unix tree ascii unrar unzip p7zip zhcon \
