@@ -7,7 +7,9 @@
 apt-get -y install aptitude synaptic deborphan gtkorphan
 # ttf-mscorefonts-installer包: 该安装器会下载win下的核心字体, fonts-liberation包是win下核心字体的变体
 aptitude -y install numix-gtk-theme numix-icon-theme \
-                    fonts-wqy-microhei fonts-wqy-zenhei fonts-symbola fonts-font-awesome \
+                    fonts-ubuntu fonts-ubuntu-console \
+                    fonts-wqy-microhei fonts-wqy-zenhei \
+                    fonts-symbola fonts-font-awesome \
                     orage fcitx fcitx-table-wubi goldendict smplayer vlc
 # accountsservice可以抑制lightdm的一些错误, 别装locate, 应该装mlocate
 # xbacklight terminator tmux byobu arbtt trash-cli
