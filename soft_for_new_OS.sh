@@ -50,7 +50,10 @@ aptitude -y install automake build-essential cmake\
 sudo pip3 install httpie ipython
 
 #for vim插件: echo has('python3')
-aptitude -y install python3-flake8 python3-isort python3-yapf shellcheck
+# 1. sudo pip3 install isort yapf flake8
+# 或:
+# 2. apt install isort yapf3 flake8 # python3-isort/yapf/flake8没有bin文件 
+aptitude -y install isort yapf3 flake8 shellcheck
 
 # for nodejs
 # https://github.com/nodesource/distributions
