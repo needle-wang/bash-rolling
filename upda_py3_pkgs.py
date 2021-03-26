@@ -19,14 +19,15 @@ from pip._internal.utils.misc import get_installed_distributions
 def main():
   use_proxy = '-i https://pypi.tuna.tsinghua.edu.cn/simple'
   for dist in get_installed_distributions():
-    print('[%s: %s]' % (dist.project_name, dist.location))
+    _msg = '[{}: {}]: '.format(dist.project_name, dist.location)
     if 'local' in dist.location:
+      print(_msg)
       call('sudo -H pip3 install -U %s %s' % (use_proxy, dist.project_name),
            shell=True)
     else:
       # 说明此包使用的是apt-get install python3-* 形式安装的
-      print('    installed by OS, I think it is better not to upgrade.')
-    print('-------华丽的分割线-------')
+      # print('{}\tinstalled by OS, ignore...'.format(_msg))
+      pass
 
 
 if __name__ == '__main__':
