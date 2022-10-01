@@ -129,9 +129,6 @@ unpack zip, rar, tar.gz...
 - `unzips-gbk.py`  
 unzip the gbk zip files.  
 
-- `upda_py2_pkgs.py`  
-use pip2 to install --update all python2 packages.  
-
 - `upda_py3_pkgs.py`  
 use pip3 to install --update all python3 packages.  
 

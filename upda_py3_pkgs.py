@@ -11,7 +11,7 @@
 
 from subprocess import call
 
-import pip
+# import pip
 # pip V10.0.0以上版本需要导入下面的包
 from pip._internal.utils.misc import get_installed_distributions
 

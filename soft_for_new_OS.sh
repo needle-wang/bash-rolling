@@ -37,7 +37,7 @@ aptitude -y install dnsutils mailutils openssh-client lrzsz lftp fping tracerout
 # 开发相关
 # 使用get-pip.py文件 安装pip3
 # automake, build-essential(包含gcc g++ make), cmake: 用于编译, 必备的!
-aptitude -y install automake build-essential cmake\
+aptitude -y install automake build-essential cmake python3-dev\
                     git gitk git-cola \
                     mycli jq cloc # 代码行数统计(类似于wc -l)
                     # mysql-server mysql-workbench \
